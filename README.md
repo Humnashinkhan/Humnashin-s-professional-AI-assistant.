@@ -1,16 +1,72 @@
-# React + Vite
+# 🤖 Humnashin AI Assistant
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An AI-powered professional portfolio assistant that allows recruiters, visitors, and developers to interact with Humnashin's professional profile through a conversational chat interface.
 
-Currently, two official plugins are available:
+The project combines a **React frontend**, **n8n AI workflow automation**, **Pinecone vector search**, **Google Gemini**, and **Retrieval-Augmented Generation (RAG)** to provide context-aware answers about Humnashin's professional experience, skills, projects, and technical background.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 💬 Conversational AI chat interface
+- 🧠 Retrieval-Augmented Generation (RAG)
+- 🔎 Semantic search using Pinecone Vector Database
+- 🤖 Google Gemini-powered AI responses
+- ⚡ n8n workflow automation as the backend
+- 🧾 Knowledge-base-based responses
+- 💾 Conversation memory using n8n Simple Memory
+- 🔐 Environment variables for configuration
+- 📱 Responsive React frontend
+- 🛡️ Designed to avoid exposing AI API credentials in the frontend
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## 🏗️ Architecture
+
+```text
+                 ┌─────────────────────┐
+                 │    React Frontend   │
+                 │     Chat Interface  │
+                 └──────────┬──────────┘
+                            │
+                            │ HTTP Request
+                            ▼
+                 ┌─────────────────────┐
+                 │     n8n Chat        │
+                 │      Trigger        │
+                 └──────────┬──────────┘
+                            │
+                            ▼
+                 ┌─────────────────────┐
+                 │      AI Agent       │
+                 └──────┬──────┬───────┘
+                        │      │
+             ┌──────────┘      └───────────┐
+             ▼                              ▼
+   ┌──────────────────┐          ┌──────────────────┐
+   │  Simple Memory   │          │ Pinecone Vector  │
+   │                  │          │      Store       │
+   └──────────────────┘          └────────┬─────────┘
+                                          │
+                                          ▼
+                                ┌──────────────────┐
+                                │ Gemini Embeddings│
+                                └──────────────────┘
+
+                        AI Agent
+                           │
+                           ▼
+                 ┌──────────────────┐
+                 │ Google Gemini     │
+                 │   Chat Model      │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │ AI Response      │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │ React Chat UI    │
+                 └──────────────────┘
